@@ -44,8 +44,19 @@
     @endforeach
 </table>
 
-<div class="pull-right submit-btn">
-    <a href="/user/search" class="btn btn-success" style=" background-color: yellow;color: black;">ユーザー検索</a>
-</div>
+
+
+<nav class="pull-right submit-btn">
+    <ul>
+        <li><a href="/user/search" class="btn btn-success" style=" background-color: yellow;color: black;">ユーザー検索</a></li>
+        <li><a href="/followList/index" class="btn btn-success" style=" background-color: yellow;color: black;">フォローリスト</a></li>
+        <li><a href="/followerList/index" class="btn btn-success" style=" background-color: yellow;color: black;">フォロワーリスト</a></li>
+    </ul>
+</nav>
+
+
+
+
+
 
 @endsection

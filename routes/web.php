@@ -40,3 +40,12 @@ Route::controller(FollowsController::class)->group(function () {
     Route::post('/user/follow/add', 'add')->name('user.follow.add');
     Route::post('/user/follow/delete', 'delete')->name('user.follow.delete');
 });
+
+Route::controller(FollowListsController::class)->group(function () {
+    Route::get('/followList/index', 'follows')->name('user.follows');
+});
+
+Route::controller(FollowerListsController::class)->group(function () {
+    Route::get('/followerList/index', 'followers')->name('user.followers');
+});
+
