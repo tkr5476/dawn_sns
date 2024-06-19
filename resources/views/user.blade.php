@@ -1,18 +1,41 @@
 @extends('layouts.app')
 
-
 @section('content')
 
 
-    <form action="/user/search/1" method="post">
-        @csrf
-        <input type="text" name="name">
-        <button type="submit">検索</button>
-    </form>
+<form action="/user/search/again" method="post">
+    @csrf
+    <input type="text" name="name">
+    <button type="submit">検索</button>
+    @if (isset($keyword))
+        <p>検索ワード：{{$keyword}}</p>
+    @endif
 
-    @foreach($user as $user)
-        <p>{{$user->name}}</p>
-    @endforeach
+
+</form>
+
+@foreach($users as $user)
+<table>
+    <tr>
+        <td>{{$user->image}}</td>
+        <td>{{$user->name}}</td>
+        <td>
+            @if ($followings->contains('user_id',$user->id))
+            <form action="/user/follow/delete" method="post">
+                @csrf
+                <input type="hidden" name="id" value="{{ $user->id }}">
+                <button type="submit" class="btn btn-primary">フォローをはずす</button>
+            </form>
+            @else
+            <form action="/user/follow/add" method="post">
+                @csrf
+                <input type="hidden" name="id" value="{{ $user->id }}">
+                <button type="submit" class="btn btn-primary">フォローする</button>
+            </form>
+            @endif
+        </td>
+    </tr>
+</table>
+@endforeach
 
 @endsection
-

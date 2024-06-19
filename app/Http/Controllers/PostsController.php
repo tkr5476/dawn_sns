@@ -41,12 +41,15 @@ class PostsController extends Controller
             ->join('users','posts.user_id','=','users.id')
             ->select('users.id as u_id','users.name','users.image','posts.id as p_id','posts.post','posts.created_at')
             ->get();
+
         return view('top', ['posts' => $posts]);
     }
 
     public function editForm($id)
     {
-        $post = DB::table('posts')->where('id',$id)->first();
+        $post = DB::table('posts')
+        ->where('id', $id)->first();
+
         return view('update',['post' => $post]);
     }
 
@@ -55,7 +58,8 @@ class PostsController extends Controller
         $this->validator($request->all())->validate();
         $id = $request->input('id');
         $post = $request->input('post');
-        DB::table('posts')->where('id',$id)->update(['post' => $post]);
+        DB::table('posts')
+        ->where('id',$id)->update(['post' => $post]);
 
         return redirect('/top');
     }
