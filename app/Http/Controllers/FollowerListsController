@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class FollowerListsController extends Controller
 {
-    public function index()
+    public function followerList()
     {
         return view('followerList.index');
     }

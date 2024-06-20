@@ -12,63 +12,29 @@ use App\Models\Follow;
 class FollowsController extends Controller
 {
 
-public function add(Request $request)
-{
-    $follow = $request -> input('id');
+    public function add(Request $request)
+    {
+        $follow = $request->input('id');
 
-    DB::table('follows')->insert([
+        DB::table('follows')->insert([
             'follower_id' => Auth::id(),
             'user_id' => $follow,
         ]);
 
-    return redirect('/user/search');
+        return redirect('/user/search');
+    }
 
+    public function delete(Request $request)
+    {
+        $follow = $request->input('id');
 
-}
+        DB::table('follows')
+            ->where([
+                'follower_id' => Auth::id(),
+                'user_id' => $follow,
+            ])
+            ->delete();
 
-public function delete(Request $request)
-{
-    $follow = $request ->input('id');
-
-    DB::table('follows')
-    ->where([
-        'follower_id' => Auth::id(),
-        'user_id' => $follow,
-    ])
-    ->delete();
-
-    return redirect('/user/search');
-
-}
-
-
-
-
-
-
-
-
-
-
-    // public function add(Request $request)
-    // {
-    //     $follow = $request->input('id');
-    //     DB::table('follows')->insert([
-    //         'follower_id' => Auth::id(),
-    //         'user_id' => $follow,
-    //     ]);
-    //     return redirect('/user/search');
-    // }
-
-    // public function delete(Request $request)
-    // {
-    //     $follow = $request->input('id');
-    //     DB::table('follows')
-    //         ->where([
-    //             'follower_id' => Auth::id(),
-    //             'user_id' => $follow,
-    //         ])
-    //         ->delete();
-    //     return redirect('/user/search');
-    // }
+        return redirect('/user/search');
+    }
 }

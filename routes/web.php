@@ -42,10 +42,12 @@ Route::controller(FollowsController::class)->group(function () {
 });
 
 Route::controller(FollowListsController::class)->group(function () {
-    Route::get('/followList/index', 'follows')->name('user.follows');
+    Route::get('/followList/index', 'followList')->name('user.follows');
+    Route::get('/followList/profile', 'userProfile')->name('user.follows.profile');
+    Route::get('/followList/profile/{id}', 'userProfile')->name('user.follows.profile');
 });
 
 Route::controller(FollowerListsController::class)->group(function () {
-    Route::get('/followerList/index', 'followers')->name('user.followers');
+    Route::get('/followerList/index', 'followerList')->name('user.followers');
 });
 
