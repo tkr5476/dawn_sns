@@ -7,17 +7,14 @@
 <table>
     @foreach ($followIcons as $followIcon)
     <tr>
-        <td>
-            <form action="/follow/profile" method="post">
-                <input type="hidden" name="id" value="{{ $followIcon->id }}">
-                <button type="submit" class="btn btn-primary">
-                    <img src="{{ $followIcon->image }}" alt="ユーザーアイコン">
-                </button>
-            </form>
+        <td class="btn btn-primary">
+            <a href="/followList/{{ $followIcon->id }}/profile">
+                <img src="{{ $followIcon->image }}" alt="ユーザーアイコン">
+            </a>
         </td>
         <td>{{ $followIcon->name }}</td>
     <tr>
-    @endforeach
+        @endforeach
 </table>
 
 <hr>
@@ -25,13 +22,10 @@
 <table>
     @foreach ($followPosts as $followPost)
     <tr>
-        <td>
-            <form action="/follow/profile" method="post">
-                <input type="hidden" name="id" value="{{ $followPost->id }}">
-                <button type="submit" class="btn btn-primary">
-                    <img src="{{ $followPost->image }}" alt="ユーザーアイコン">
-                </button>
-            </form>
+        <td class="btn btn-primary">
+            <a href="/followList/{{ $followPost->id }}/profile">
+                <img src="{{ $followPost->image }}" alt="ユーザーアイコン">
+            </a>
         </td>
         <td>{{ $followPost->name }}</td>
         <td>{{ $followPost->post }}</td>
