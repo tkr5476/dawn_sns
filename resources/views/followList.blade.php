@@ -5,14 +5,14 @@
 <h1>Follow List</h1>
 
 <table>
-    @foreach ($followIcons as $followIcon)
+    @foreach ($followUsers as $followUser)
     <tr>
-        <td class="btn btn-primary">
-            <a href="/followList/{{ $followIcon->id }}/profile">
-                <img src="{{ $followIcon->image }}" alt="ユーザーアイコン">
+        <td>
+            <a href="/user/{{ $followUser->id }}/profile">
+                <img src="{{asset('/images/' . $followUser->image)}}" alt="ユーザーアイコン">
             </a>
         </td>
-        <td>{{ $followIcon->name }}</td>
+        <td>{{ $followUser->name }}</td>
     <tr>
         @endforeach
 </table>
@@ -22,9 +22,9 @@
 <table>
     @foreach ($followPosts as $followPost)
     <tr>
-        <td class="btn btn-primary">
-            <a href="/followList/{{ $followPost->id }}/profile">
-                <img src="{{ $followPost->image }}" alt="ユーザーアイコン">
+        <td>
+            <a href="/user/{{ $followPost->id }}/profile">
+                <img src="{{asset('/images/' . $followPost->image)}}" alt="ユーザーアイコン">
             </a>
         </td>
         <td>{{ $followPost->name }}</td>

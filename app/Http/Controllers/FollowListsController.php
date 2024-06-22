@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Follow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Post;
-use App\Models\Follow;
+
 
 
 class FollowListsController extends Controller
@@ -16,7 +17,7 @@ class FollowListsController extends Controller
 
     public function followList()
     {
-        $followIcons = DB::table('follows')
+        $followUsers = DB::table('follows')
             ->join('users', 'follows.user_id', '=', 'users.id')
             ->where('follows.follower_id', Auth::id())
             ->select('users.id', 'users.name', 'users.image')
@@ -31,25 +32,11 @@ class FollowListsController extends Controller
             ->orderBy('posts.created_at', 'desc')
             ->get();
 
-        return view('followList', ['followIcons' => $followIcons, 'followPosts' => $followPosts]);
+        return view('followList', ['followUsers' => $followUsers, 'followPosts' => $followPosts]);
     }
 
-    public function userProfile($id)
-    {
-        $userProfile = DB::table('users')
-            ->where('users.id', $id)
-            ->select('users.id', 'users.name', 'users.image', 'users.bio')
-            ->first();
-
-            $userPosts = DB::table('posts')
-            ->where('user_id', $id)
-            ->select('posts.id','posts.user_id','posts.post', 'posts.created_at')
-            ->orderBy('posts.created_at', 'desc')
-            ->get();
 
 
-            return view('userProfile', ['userProfile' => $userProfile, 'userPosts' => $userPosts]);
-    }
 
 
 

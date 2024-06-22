@@ -1,13 +1,43 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>{{ $userProfile->name }}</h1>
-    <p>{{ $userProfile->bio }}</p>
-    <img src="{{ $userProfile->image }}" alt="ユーザーアイコン">
 
-    @foreach ($userPosts as $userPost)
-        <p>{{ $userPost->post }}</p>
-        <p>{{ $userPost->created_at }}</p>
-    @endforeach
+<table>
+    <tr>
+        <th><img src="{{ $userProfile->image }}" alt="ユーザーアイコン"></th>
+    </tr>
+
+    <tr>
+        <th>
+            <h3>Name</h3>
+        </th>
+        <td>
+            <h1>{{ $userProfile->name }}</h1>
+
+        </td>
+    </tr>
+
+    <tr>
+        <th>
+            <p>Bio</p>
+        </th>
+
+        <td>
+            <p>{{ $userProfile->bio }}</p>
+        </td>
+    </tr>
+</table>
+
+@foreach ($userPosts as $userPost)
+<table>
+    <tr>
+        <th>
+            <p>{{ $userPost->post }}</p>
+        </th>
+        <td>
+            <p>{{ $userPost->created_at }}</p>
+        </td>
+    </tr>
+</table>
+@endforeach
 @endsection
-

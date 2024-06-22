@@ -7,9 +7,9 @@
     @csrf
     <input type="text" name="name">
     <button type="submit">検索</button>
-    @if (isset($keyword))
-        <p>検索ワード：{{$keyword}}</p>
-    @endif
+    @isset($keyword)
+    <p>検索ワード：{{$keyword}}</p>
+    @endisset
 
 
 </form>
@@ -17,7 +17,11 @@
 @foreach($users as $user)
 <table>
     <tr>
-        <td>{{$user->image}}</td>
+        <td>
+            <a href="/user/{{ $user->id }}/profile">
+                <img src="{{asset('/images/' . $user->image)}}" alt="ユーザーアイコン">
+            </a>
+        </td>
         <td>{{$user->name}}</td>
         <td>
             @if ($followings->contains('user_id',$user->id))

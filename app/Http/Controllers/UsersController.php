@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Follow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -64,4 +66,22 @@ class UsersController extends Controller
 
         return view('user',['users' => $users, 'followings'=> $followings, 'keyword' => $keyword ]);
     }
+
+    public function userProfile($targetUserId)
+    {
+        $userProfile = DB::table('users')
+            ->where('users.id', $targetUserId)
+            ->select('users.id', 'users.name', 'users.image', 'users.bio')
+            ->first();
+
+        $userPosts = DB::table('posts')
+            ->where('user_id', $targetUserId)
+            ->select('posts.id', 'posts.user_id', 'posts.post', 'posts.created_at')
+            ->orderBy('posts.created_at', 'desc')
+            ->get();
+
+
+        return view('userProfile', ['userProfile' => $userProfile, 'userPosts' => $userPosts]);
+    }
+
 }

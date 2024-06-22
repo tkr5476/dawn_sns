@@ -34,6 +34,7 @@ Route::controller(PostsController::class)->group(function () {
 Route::controller(UsersController::class)->group(function () {
     Route::get('/user/search', 'search')->name('user.search');
     Route::post('/user/search/again', 'again')->name('user.search.again');
+    Route::get('/user/{targetUserId}/profile', 'userProfile')->name('user.profile');
 });
 
 Route::controller(FollowsController::class)->group(function () {
@@ -43,10 +44,8 @@ Route::controller(FollowsController::class)->group(function () {
 
 Route::controller(FollowListsController::class)->group(function () {
     Route::get('/followList/index', 'followList')->name('user.follows');
-    Route::get('/followList/{id}/profile', 'userProfile')->name('user.follows.profile');
 });
 
 Route::controller(FollowerListsController::class)->group(function () {
     Route::get('/followerList/index', 'followerList')->name('user.followers');
 });
-
