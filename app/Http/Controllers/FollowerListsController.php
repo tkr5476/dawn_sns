@@ -30,9 +30,6 @@ class FollowerListsController extends Controller
             ->orderBy('posts.created_at', 'desc')
             ->get();
 
-        dd([$followerUsers, $followerPosts]);
-
-
-        return view('followerList', ['followerUsers' => $followerUsers, 'followerPosts' => $followerPosts]);
+        return view('/user/followerList', ['followerUsers' => $followerUsers, 'followerPosts' => $followerPosts]);
     }
 }

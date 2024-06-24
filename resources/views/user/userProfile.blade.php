@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.login')
 
 @section('content')
 
 <table>
     <tr>
-        <th><img src="{{ $userProfile->image }}" alt="ユーザーアイコン"></th>
+        <th><img src="{{ asset('/images/' . $userProfile->image) }}" alt="ユーザーアイコン"></th>
     </tr>
 
     <tr>

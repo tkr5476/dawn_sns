@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.login')
 
 
     @section('content')
@@ -16,4 +16,3 @@
 
     @endsection
 
-    

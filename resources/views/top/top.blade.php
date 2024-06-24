@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.login')
 
 
 
@@ -48,13 +48,19 @@
     @endforeach
 </table>
 
+<nav class="pull-right submit-btn">
+            <ul>
+                <li>
+                    <p>フォロー数：{{ $followCounts }}</p>
+                    <span><a href="/followList/index" class="btn btn-success" style=" background-color: yellow;color: black;">フォローリスト</a></span>
+                </li>
+                <li>
+                    <p>フォロワー数：{{ $followerCounts }}</p>
+                    <span><a href="/followerList/index" class="btn btn-success" style=" background-color: yellow;color: black;">フォロワーリスト</a></span>
+                </li>
+                <li><a href="/user/search" class="btn btn-success" style=" background-color: yellow;color: black;">ユーザー検索</a></li>
 
-
-
-
-
-
-
-
+            </ul>
+        </nav>
 
 @endsection

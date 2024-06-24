@@ -21,7 +21,7 @@ class FollowsController extends Controller
             'user_id' => $follow,
         ]);
 
-        return redirect('/user/search');
+        return redirect('/searchUser');
     }
 
     public function delete(Request $request)
@@ -35,6 +35,6 @@ class FollowsController extends Controller
             ])
             ->delete();
 
-        return redirect('/user/search');
+        return redirect('/searchUser');
     }
 }

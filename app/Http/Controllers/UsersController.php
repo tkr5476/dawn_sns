@@ -13,11 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
-    // public function search(Request $request)
-    // {
-    //     $user = User::where('name',$request->name)->get('name');
-    //     return view('user',compact('user'));
-    // }
+
     public function validator(array $data)
     {
         return Validator::make(
@@ -37,15 +33,15 @@ class UsersController extends Controller
         $this->validator($request->all());
 
         $users = DB::table('users')
-        ->where('id','!=',Auth::id())
-        ->select('id','name','image')
-        ->get();
+            ->where('id', '!=', Auth::id())
+            ->select('id', 'name', 'image')
+            ->get();
 
         $followings = DB::table('follows')
-        ->where('follower_id',Auth::id())
-        ->get();
+            ->where('follower_id', Auth::id())
+            ->get();
 
-        return view('user',['users' => $users, 'followings'=> $followings]);
+        return view('user.searchUser', ['users' => $users, 'followings' => $followings]);
     }
 
     public function again(Request $request)
@@ -54,17 +50,17 @@ class UsersController extends Controller
         $keyword = $request->name;
 
         $users = DB::table('users')
-        ->where('id','!=',Auth::id())
-        ->where('name', 'like', '%' . $keyword . '%')
-        ->select('id','name','image')
-        ->get();
+            ->where('id', '!=', Auth::id())
+            ->where('name', 'like', '%' . $keyword . '%')
+            ->select('id', 'name', 'image')
+            ->get();
 
         $followings = DB::table('follows')
-        ->where('follower_id',Auth::id())
-        ->get();
+            ->where('follower_id', Auth::id())
+            ->get();
 
 
-        return view('user',['users' => $users, 'followings'=> $followings, 'keyword' => $keyword ]);
+        return view('user.searchUser', ['users' => $users, 'followings' => $followings, 'keyword' => $keyword]);
     }
 
     public function userProfile($targetUserId)
@@ -81,7 +77,29 @@ class UsersController extends Controller
             ->get();
 
 
-        return view('userProfile', ['userProfile' => $userProfile, 'userPosts' => $userPosts]);
+        return view('user.userProfile', ['userProfile' => $userProfile, 'userPosts' => $userPosts]);
     }
 
+    public function loginUser()
+    {
+        $loginUser = DB::table('users')
+            ->where('id', Auth::id())
+            ->select('id', 'name', 'image', 'email', 'bio')
+            ->first();
+
+        $loginUserPosts = DB::table('posts')
+            ->where('user_id', Auth::id())
+            ->select('id', 'user_id', 'post', 'created_at')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('user.loginUser', ['loginUser' => $loginUser, 'loginUserPosts' => $loginUserPosts]);
+    }
+
+    public function editUserProfile()
+    {
+        //ユーザー情報のUpdateできるためのメソッド追加
+
+        return view('user.editUserProfile');
+    }
 }

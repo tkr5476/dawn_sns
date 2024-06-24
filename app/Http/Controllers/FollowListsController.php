@@ -32,7 +32,7 @@ class FollowListsController extends Controller
             ->orderBy('posts.created_at', 'desc')
             ->get();
 
-        return view('followList', ['followUsers' => $followUsers, 'followPosts' => $followPosts]);
+        return view('/user/followList', ['followUsers' => $followUsers, 'followPosts' => $followPosts]);
     }
 
 
