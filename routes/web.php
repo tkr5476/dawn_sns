@@ -7,7 +7,8 @@ use App\Http\Controllers\TopController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Auth\LoginController;
+
 
 
 
@@ -20,7 +21,8 @@ Route::get('/', function () {
 Auth::routes();
 
 
-
+// Route::get('/top', [TopController::class, 'index'])->middleware('auth');
+// Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::controller(PostsController::class)->group(function () {
