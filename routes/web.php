@@ -37,8 +37,9 @@ Route::controller(UsersController::class)->group(function () {
     Route::get('/user/search', 'search')->name('user.search');
     Route::post('/user/search/again', 'again')->name('user.search.again');
     Route::get('/user/{targetUserId}/profile', 'userProfile')->name('user.profile');
-    Route::post('/loginUser', 'loginUser')->name('loginUser');
+    Route::get('/loginUser', 'loginUser')->name('loginUser');
     Route::get('/editUserProfile', 'editUserProfile')->name('editUserProfile');
+    Route::put('/userProfile/update', 'updateProfile')->name('updateProfile');
 });
 
 Route::controller(FollowsController::class)->group(function () {

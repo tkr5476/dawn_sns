@@ -98,8 +98,35 @@ class UsersController extends Controller
 
     public function editUserProfile()
     {
-        //ユーザー情報のUpdateできるためのメソッド追加
+        $user = DB::table('users')
+            ->where('id', Auth::id())
+            ->select('id', 'name', 'email', 'bio', 'password', 'image')
+            ->first();
 
-        return view('user.editUserProfile');
+
+        return view('user.editUserProfile', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $bio = $request->input('bio');
+        $password = $request->input('password');
+        $image = $request->input('image');
+
+        DB::table('users')
+            ->where('id', $id)
+            ->update([
+                'name' => $name,
+                'email' => $email,
+                'bio' => $bio,
+                'password' => $password,
+                'image' => $image,
+            ]);
+
+
+        return redirect('/loginUser');
     }
 }

@@ -9,7 +9,7 @@
         <input type="text" name="post" class="form-control" placeholder="投稿内容">
     </div>
     <div class="pull-right submit-btn">
-        <button type="submit" class="btn btn-success">追加</button>
+        <button type="submit" class="btn btn-info">追加</button>
     </div>
     @error('post')
     <div class="alert alert-danger">{{ $message }}</div>
@@ -23,7 +23,7 @@
     <tr>
         <td>
             <a href="/user/{{ $post->u_id }}/profile"></a>
-                <img src="{{asset('/images/' . $post->image)}}" alt="プロフィール画像">
+            <img src="{{asset('/images/' . $post->image)}}" alt="プロフィール画像">
             </a>
         </td>
         <td>{{ $post->name}}</td>
@@ -47,20 +47,5 @@
     </tr>
     @endforeach
 </table>
-
-<nav class="pull-right submit-btn">
-            <ul>
-                <li>
-                    <p>フォロー数：{{ $followCounts }}</p>
-                    <span><a href="/followList/index" class="btn btn-success" style=" background-color: yellow;color: black;">フォローリスト</a></span>
-                </li>
-                <li>
-                    <p>フォロワー数：{{ $followerCounts }}</p>
-                    <span><a href="/followerList/index" class="btn btn-success" style=" background-color: yellow;color: black;">フォロワーリスト</a></span>
-                </li>
-                <li><a href="/user/search" class="btn btn-success" style=" background-color: yellow;color: black;">ユーザー検索</a></li>
-
-            </ul>
-        </nav>
 
 @endsection

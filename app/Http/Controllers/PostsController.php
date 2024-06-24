@@ -68,7 +68,8 @@ class PostsController extends Controller
         $id = $request->input('id');
         $post = $request->input('post');
         DB::table('posts')
-            ->where('id', $id)->update(['post' => $post]);
+            ->where('id', $id)
+            ->update(['post' => $post]);
 
         return redirect('/top');
     }
