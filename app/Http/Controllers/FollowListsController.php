@@ -26,7 +26,7 @@ class FollowListsController extends Controller
 
         $followPosts = DB::table('follows')
             ->join('users', 'follows.user_id', '=', 'users.id')
-            ->leftJoin('posts', 'follows.user_id', '=', 'posts.user_id')
+            ->Join('posts', 'follows.user_id', '=', 'posts.user_id')
             ->where('follows.follower_id', Auth::id())
             ->select('users.id', 'users.name', 'users.image', 'posts.post', 'posts.created_at')
             ->orderBy('posts.created_at', 'desc')
