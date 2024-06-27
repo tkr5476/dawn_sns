@@ -29,6 +29,16 @@ class PostsController extends Controller
         );
     }
 
+    public function index()
+    {
+        $posts = DB::table('posts')
+            ->join('users', 'posts.user_id', '=', 'users.id')
+            ->select('users.id as u_id', 'users.name', 'users.image', 'posts.id as p_id', 'posts.post', 'posts.created_at')
+            ->orderBy('posts.created_at', 'desc')
+            ->get();
+
+        return view('top.top', ['posts' => $posts]);
+    }
 
     public function create(Request $request)
     {
@@ -41,16 +51,6 @@ class PostsController extends Controller
         ]);
 
         return redirect('/top');
-    }
-
-    public function index()
-    {
-        $posts = DB::table('posts')
-            ->join('users', 'posts.user_id', '=', 'users.id')
-            ->select('users.id as u_id', 'users.name', 'users.image', 'posts.id as p_id', 'posts.post', 'posts.created_at')
-            ->get();
-
-        return view('top.top', ['posts' => $posts]);
     }
 
     public function editForm($id)
