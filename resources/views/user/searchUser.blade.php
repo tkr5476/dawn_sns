@@ -10,8 +10,6 @@
     @isset($keyword)
     <p>検索ワード：{{$keyword}}</p>
     @endisset
-
-
 </form>
 
 @foreach($users as $user)
@@ -36,6 +34,7 @@
                 <input type="hidden" name="id" value="{{ $user->id }}">
                 <button type="submit" class="btn btn-outline-info text-dark">フォローする</button>
             </form>
+
             @endif
         </td>
     </tr>

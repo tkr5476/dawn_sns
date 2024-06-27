@@ -12,22 +12,51 @@ use App\Models\Follow;
 class FollowsController extends Controller
 {
 
+    public function addValidator(array $data)
+    {
+        return Validator::make(
+            $data,
+            [
+                'follow' => ['required', 'regex:/^[0-9]+$/']
+            ],
+            [
+                'follow.required' => 'フォローに失敗しました。もう一度やり直してください。',
+                'follow.regex' => 'フォローに失敗しました。もう一度やり直してください。',
+            ]
+        );
+    }
+
     public function add(Request $request)
     {
-        $follow = $request->input('id');
+        $this->addValidator($request->all())->validate();
 
+        $follow = $request->input('id');
         DB::table('follows')->insert([
             'follower_id' => Auth::id(),
             'user_id' => $follow,
         ]);
 
-        return redirect('/searchUser');
+        return redirect()->route('user.search');
     }
 
+    public function deleteValidator(array $data)
+    {
+        return Validator::make(
+            $data,
+            [
+                'follow' => ['required', 'regex:/^[0-9]+$/']
+            ],
+            [
+                'follow.required' => 'フォロー解除に失敗しました。もう一度やり直してください。',
+                'follow.regex' => 'フォロー解除に失敗しました。もう一度やり直してください。',
+            ]
+        );
+    }
     public function delete(Request $request)
     {
-        $follow = $request->input('id');
+        $this->deleteValidator($request->all())->validate();
 
+        $follow = $request->input('id');
         DB::table('follows')
             ->where([
                 'follower_id' => Auth::id(),
@@ -35,6 +64,6 @@ class FollowsController extends Controller
             ])
             ->delete();
 
-        return redirect('/searchUser');
-    }
+            return redirect()->route('user.search');
+        }
 }

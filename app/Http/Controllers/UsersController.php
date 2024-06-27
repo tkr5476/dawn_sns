@@ -76,8 +76,11 @@ class UsersController extends Controller
             ->orderBy('posts.created_at', 'desc')
             ->get();
 
+        $followings = DB::table('follows')
+            ->where('follower_id', Auth::id())
+            ->get();
 
-        return view('user.userProfile', ['userProfile' => $userProfile, 'userPosts' => $userPosts]);
+        return view('user.userProfile', ['userProfile' => $userProfile, 'userPosts' => $userPosts, 'followings' => $followings]);
     }
 
     public function loginUser()
