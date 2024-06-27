@@ -72,6 +72,11 @@
                                     @csrf
                                     <button type="submit" class="btn">プロフィール編集</button>
                                 </form>
+                                <form action="/top" method="get">
+                                    @csrf
+                                    <button type="submit" class="btn">トップページ</button>
+                                </form>
+
                             </div>
 
 

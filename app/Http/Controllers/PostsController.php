@@ -15,7 +15,7 @@ class PostsController extends Controller
         $this->middleware('auth');
     }
 
-    protected function validator(array $data)
+    protected function postValidator(array $data)
     {
         return Validator::make(
             $data,
@@ -42,7 +42,8 @@ class PostsController extends Controller
 
     public function create(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $this->postValidator($request->all())->validate();
+
         $post = $request->input('post');
         DB::table('posts')->insert([
             'post' => $post,
@@ -53,8 +54,24 @@ class PostsController extends Controller
         return redirect('/top');
     }
 
-    public function editForm($id)
+    public function editValidator(array $data)
     {
+        return Validator::make(
+            $data,
+            [
+                'post.id' => ['required', 'regex:/^[0-9]+$/']
+            ],
+            [
+                'post.required' => 'メッセージ情報を取得できませんでした。もう一度やり直してください。',
+                'post.regex' => 'メッセージ情報を取得できませんでした。もう一度やり直してください。',
+            ]
+        );
+    }
+    public function editForm(Request $request)
+    {
+        $this->editValidator($request->all())->validate();
+
+        $id = $request->input('id');
         $post = DB::table('posts')
             ->where('id', $id)
             ->first();
@@ -62,9 +79,26 @@ class PostsController extends Controller
         return view('top.update', ['post' => $post]);
     }
 
+    public function updateValidator(array $data)
+    {
+        return Validator::make(
+            $data,
+            [
+                'post.id' => ['required', 'regex:/^[0-9]+$/'],
+                'post.post' => ['required', 'string', 'max:400']
+            ],
+            [
+                'post.id.required' => 'メッセージの編集に失敗しました。もう一度やり直してください。',
+                'post.id.regex' => 'メッセージの編集に失敗しました。もう一度やり直してください。',
+                'post.post.required' => 'メッセージを入力してください。',
+                'post.post.max' => 'メッセージは400文字以内で入力してください。',
+            ]
+        );
+    }
     public function update(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $this->updateValidator($request->all())->validate();
+
         $id = $request->input('id');
         $post = $request->input('post');
         DB::table('posts')
@@ -74,8 +108,25 @@ class PostsController extends Controller
         return redirect('/top');
     }
 
+
+    public function deleteValidator(array $data)
+    {
+        return Validator::make(
+            $data,
+            [
+                'post.id' => ['required', 'regex:/^[0-9]+$/']
+            ],
+            [
+                'post.required' => 'メッセージの削除に失敗しました。もう一度やり直してください。',
+                'post.regex' => 'メッセージの削除に失敗しました。もう一度やり直してください。',
+            ]
+        );
+    }
+
     public function delete(Request $request)
     {
+        $this->deleteValidator($request->all())->validate();
+
         $id = $request->input('id');
         DB::table('posts')
             ->where('id', $id)

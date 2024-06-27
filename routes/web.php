@@ -21,12 +21,8 @@ Route::get('/', function () {
 Auth::routes();
 
 
-// Route::get('/top', [TopController::class, 'index'])->middleware('auth');
-// Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-
-
 Route::controller(PostsController::class)->group(function () {
-    Route::get('top', 'index')->name('top');
+    Route::get('/top', 'index')->name('top');
     Route::post('/post/create', 'create')->name('post.create');
     Route::get('/post/{p_id}/update-form', 'editForm')->name('post.edit');
     Route::put('/post/update', 'update')->name('post.update');
@@ -45,6 +41,8 @@ Route::controller(UsersController::class)->group(function () {
 Route::controller(FollowsController::class)->group(function () {
     Route::post('/user/follow/add', 'add')->name('user.follow.add');
     Route::post('/user/follow/delete', 'delete')->name('user.follow.delete');
+    Route::post('/profile/follow/add', 'add')->name('profile.follow.add');
+    Route::post('/profile/follow/delete', 'delete')->name('profile.follow.delete');
 });
 
 Route::controller(FollowListsController::class)->group(function () {
