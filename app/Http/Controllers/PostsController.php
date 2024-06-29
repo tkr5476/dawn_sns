@@ -33,6 +33,9 @@ class PostsController extends Controller
     {
         $posts = DB::table('posts')
             ->join('users', 'posts.user_id', '=', 'users.id')
+            ->join('follows', 'posts.user_id', '=', 'follows.user_id')
+            ->where('users.id', Auth::id())
+            ->orWhere('follows.follower_id', Auth::id())
             ->select('users.id as u_id', 'users.name', 'users.image', 'posts.id as p_id', 'posts.post', 'posts.created_at')
             ->orderBy('posts.created_at', 'desc')
             ->get();

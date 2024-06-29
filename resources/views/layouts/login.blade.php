@@ -74,7 +74,7 @@
                                 </form>
                                 <form action="/top" method="get">
                                     @csrf
-                                    <button type="submit" class="btn">トップページ</button>
+                                    <button type="submit" class="btn">HOME</button>
                                 </form>
 
                             </div>

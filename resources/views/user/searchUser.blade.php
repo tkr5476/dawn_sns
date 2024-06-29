@@ -1,7 +1,9 @@
 @extends('layouts.login')
 
 @section('content')
-
+@error('id')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
 
 <form action="/user/search/again" method="post">
     @csrf
@@ -12,8 +14,8 @@
     @endisset
 </form>
 
-@foreach($users as $user)
 <table>
+    @foreach($users as $user)
     <tr>
         <td>
             <a href="/user/{{ $user->id }}/profile">
@@ -24,6 +26,7 @@
         <td>
             @if ($followings->contains('user_id',$user->id))
             <form action="/user/follow/delete" method="post">
+                @method('POST')
                 @csrf
                 <input type="hidden" name="id" value="{{ $user->id }}">
                 <button type="submit" class="btn btn-info">フォローをはずす</button>
@@ -38,7 +41,7 @@
             @endif
         </td>
     </tr>
+    @endforeach
 </table>
-@endforeach
 
 @endsection

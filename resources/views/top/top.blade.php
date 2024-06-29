@@ -9,7 +9,9 @@
         <input type="text" name="post" class="form-control" placeholder="投稿内容">
     </div>
     <div class="pull-right submit-btn">
-        <button type="submit" class="btn btn-info">追加</button>
+        <button type="submit" class="btn">
+            <img src="{{asset('/images/post.png')}}" alt="追加ボタン">
+        </button>
     </div>
     @error('post')
     <div class="alert alert-danger">{{ $message }}</div>

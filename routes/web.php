@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\Auth\LoginController;
 
-
-
-
-
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -41,8 +36,6 @@ Route::controller(UsersController::class)->group(function () {
 Route::controller(FollowsController::class)->group(function () {
     Route::post('/user/follow/add', 'add')->name('user.follow.add');
     Route::post('/user/follow/delete', 'delete')->name('user.follow.delete');
-    Route::post('/profile/follow/add', 'add')->name('profile.follow.add');
-    Route::post('/profile/follow/delete', 'delete')->name('profile.follow.delete');
 });
 
 Route::controller(FollowListsController::class)->group(function () {

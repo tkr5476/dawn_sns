@@ -17,11 +17,11 @@ class FollowsController extends Controller
         return Validator::make(
             $data,
             [
-                'follow' => ['required', 'regex:/^[0-9]+$/']
+                'id' => ['required', 'regex:/^[0-9]+$/']
             ],
             [
-                'follow.required' => 'フォローに失敗しました。もう一度やり直してください。',
-                'follow.regex' => 'フォローに失敗しました。もう一度やり直してください。',
+                'id.required' => 'フォローに失敗しました。もう一度やり直してください。',
+                'id.regex' => 'フォローに失敗しました。もう一度やり直してください。',
             ]
         );
     }
@@ -44,11 +44,11 @@ class FollowsController extends Controller
         return Validator::make(
             $data,
             [
-                'follow' => ['required', 'regex:/^[0-9]+$/']
+                'id' => ['required', 'regex:/^[0-9]+$/']
             ],
             [
-                'follow.required' => 'フォロー解除に失敗しました。もう一度やり直してください。',
-                'follow.regex' => 'フォロー解除に失敗しました。もう一度やり直してください。',
+                'id.required' => 'フォロー解除に失敗しました。もう一度やり直してください。',
+                'id.regex' => 'フォロー解除に失敗しました。もう一度やり直してください。',
             ]
         );
     }
