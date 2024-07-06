@@ -14,15 +14,15 @@ use Illuminate\Support\Facades\Validator;
 class UsersController extends Controller
 {
 
-    public function validator(array $data)
+    public function searchValidator(array $data)
     {
         return Validator::make(
             $data,
             [
-                'user' => ['regex:/^[ぁ-んァ-ン一-龠a-zA-Z0-9\-_]+$/u']
+                'name' => ['regex:/^[ぁ-んァ-ン一-龠a-zA-Z0-9\-_]+$/u']
             ],
             [
-                'user.regex' => 'ユーザー名には全角漢字カタカナひらがな数字記号もしくは半角英数記号を入力してください。',
+                'name.regex' => 'ユーザー名には全角漢字カタカナひらがな数字記号もしくは半角英数記号を入力してください。',
             ]
         );
     }
@@ -30,7 +30,7 @@ class UsersController extends Controller
     // }
     public function search(Request $request)
     {
-        $this->validator($request->all());
+        $this->searchValidator($request->all());
 
         $users = DB::table('users')
             ->where('id', '!=', Auth::id())
@@ -46,7 +46,7 @@ class UsersController extends Controller
 
     public function again(Request $request)
     {
-        $this->validator($request->all());
+        $this->searchValidator($request->all());
         $keyword = $request->name;
 
         $users = DB::table('users')
@@ -63,26 +63,24 @@ class UsersController extends Controller
         return view('user.searchUser', ['users' => $users, 'followings' => $followings, 'keyword' => $keyword]);
     }
 
-    public function userProfile($targetUserId)
+
+    public function loginUserProfileValidator(array $data)
     {
-        $userProfile = DB::table('users')
-            ->where('users.id', $targetUserId)
-            ->select('users.id', 'users.name', 'users.image', 'users.bio')
-            ->first();
-
-        $userPosts = DB::table('posts')
-            ->where('user_id', $targetUserId)
-            ->select('posts.id', 'posts.user_id', 'posts.post', 'posts.created_at')
-            ->orderBy('posts.created_at', 'desc')
-            ->get();
-
-        $followings = DB::table('follows')
-            ->where('follower_id', Auth::id())
-            ->get();
-
-        return view('user.userProfile', ['userProfile' => $userProfile, 'userPosts' => $userPosts, 'followings' => $followings]);
+        return Validator::make(
+            $data,
+            [
+                'name' => ['required', 'min:4', 'max:12', 'regex:/^[ぁ-んァ-ン一-龠a-zA-Z0-9\-_]+$/u'],
+                'bio' => ['max:400']
+            ],
+            [
+                'name.required' => 'ユーザー名を入力してください。',
+                'name.min' => 'ユーザー名は4文字以上12文字以内で入力してください。',
+                'name.max' => 'ユーザー名は4文字以上12文字以内で入力してください。',
+                'name.regex' => 'ユーザー名には全角漢字カタカナひらがな数字記号もしくは半角英数記号を入力してください。',
+                'bio.max' => 'メッセージは400文字以内で入力してください。',
+            ]
+        );
     }
-
     public function loginUser()
     {
         $loginUser = DB::table('users')
@@ -101,6 +99,8 @@ class UsersController extends Controller
 
     public function editUserProfile()
     {
+        $this->loginUserProfileValidator($request->all());
+
         $user = DB::table('users')
             ->where('id', Auth::id())
             ->select('id', 'name', 'email', 'bio', 'password', 'image')
@@ -131,5 +131,47 @@ class UsersController extends Controller
 
 
         return redirect('/loginUser');
+    }
+
+
+
+    public function userProfileValidator(array $data)
+    {
+        return Validator::make(
+            $data,
+            [
+                'id' => ['required', 'regex:/^[0-9]+$/']
+            ],
+            [
+                'id.required' => 'ユーザー情報の取得に失敗しました。もう一度やり直してください。',
+                'id.regex' => 'ユーザー情報の取得に失敗しました。もう一度やり直してください。',
+            ]
+        );
+    }
+    
+    public function userProfile($id)
+    {
+        $userProfile = DB::table('users')
+            ->where('id', $id)
+            ->select('id', 'name', 'image', 'bio')
+            ->first();
+
+        if (!$userProfile) {
+            // ユーザーが見つからない場合の処理
+            return view('user.userProfile', ['userProfile' => null]);
+        }
+
+        $userPosts = DB::table('posts')
+            ->where('user_id', $id)
+            ->select('id', 'user_id', 'post', 'created_at')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $followings = DB::table('follows')
+            ->where('follower_id', Auth::id())
+            ->get();
+
+
+        return view('user.userProfile', ['userProfile' => $userProfile, 'userPosts' => $userPosts, 'followings' => $followings]);
     }
 }

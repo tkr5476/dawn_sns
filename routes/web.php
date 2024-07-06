@@ -15,33 +15,33 @@ Route::get('/', function () {
 
 Auth::routes();
 
+    Route::controller(PostsController::class)->group(function () {
+        Route::get('/top', 'index')->name('top');
+        Route::post('/post/create', 'create')->name('post.create');
+        Route::get('/post/{id}/editPost', 'editPost')->name('post.edit');
+        Route::put('/post/update', 'update')->name('post.update');
+        Route::delete('/post/delete', 'delete')->name('post.delete');
+        Route::post('/posts/destroy', [PostsController::class, 'destroyPost'])->name('post.destroy');
+    });
 
-Route::controller(PostsController::class)->group(function () {
-    Route::get('/top', 'index')->name('top');
-    Route::post('/post/create', 'create')->name('post.create');
-    Route::get('/post/{p_id}/update-form', 'editForm')->name('post.edit');
-    Route::put('/post/update', 'update')->name('post.update');
-    Route::delete('/post/delete', 'delete')->name('post.delete');
-});
+    Route::controller(UsersController::class)->group(function () {
+        Route::get('/user/search', 'search')->name('user.search');
+        Route::post('/user/search/again', 'again')->name('user.search.again');
+        Route::get('/user/{id}/profile', 'userProfile')->name('user.profile');
+        Route::get('/loginUser', 'loginUser')->name('loginUser');
+        Route::get('/editUserProfile', 'editUserProfile')->name('editUserProfile');
+        Route::put('/userProfile/update', 'updateProfile')->name('updateProfile');
+    });
 
-Route::controller(UsersController::class)->group(function () {
-    Route::get('/user/search', 'search')->name('user.search');
-    Route::post('/user/search/again', 'again')->name('user.search.again');
-    Route::get('/user/{targetUserId}/profile', 'userProfile')->name('user.profile');
-    Route::get('/loginUser', 'loginUser')->name('loginUser');
-    Route::get('/editUserProfile', 'editUserProfile')->name('editUserProfile');
-    Route::put('/userProfile/update', 'updateProfile')->name('updateProfile');
-});
+    Route::controller(FollowsController::class)->group(function () {
+        Route::post('/user/follow/add', 'add')->name('user.follow.add');
+        Route::post('/user/follow/delete', 'delete')->name('user.follow.delete');
+    });
 
-Route::controller(FollowsController::class)->group(function () {
-    Route::post('/user/follow/add', 'add')->name('user.follow.add');
-    Route::post('/user/follow/delete', 'delete')->name('user.follow.delete');
-});
+    Route::controller(FollowListsController::class)->group(function () {
+        Route::get('/followList/index', 'followList')->name('user.follows');
+    });
 
-Route::controller(FollowListsController::class)->group(function () {
-    Route::get('/followList/index', 'followList')->name('user.follows');
-});
-
-Route::controller(FollowerListsController::class)->group(function () {
-    Route::get('/followerList/index', 'followerList')->name('user.followers');
-});
+    Route::controller(FollowerListsController::class)->group(function () {
+        Route::get('/followerList/index', 'followerList')->name('user.followers');
+    });

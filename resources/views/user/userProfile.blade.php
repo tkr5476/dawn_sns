@@ -2,6 +2,8 @@
 
 @section('content')
 
+@if($userProfile)
+
 <table>
     <tr>
         <th><img src="{{ asset('/images/' . $userProfile->image) }}" alt="ユーザーアイコン"></th>
@@ -61,8 +63,9 @@
     </td>--}}
 </table>
 
-@foreach ($userPosts as $userPost)
 <table>
+    @foreach ($userPosts as $userPost)
+
     <tr>
         <th>
             <p>{{ $userPost->post }}</p>
@@ -71,6 +74,11 @@
             <p>{{ $userPost->created_at }}</p>
         </td>
     </tr>
+    @endforeach
 </table>
-@endforeach
+
+@else
+<p>ユーザーが見つかりません。</p>
+@endif
+
 @endsection

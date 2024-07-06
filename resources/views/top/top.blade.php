@@ -23,27 +23,31 @@
 <table class='table table-hover'>
     @foreach ($posts as $post)
     <tr>
-        <td>
+        <th>
             <a href="/user/{{ $post->u_id }}/profile">
             <img src="{{asset('/images/' . $post->image)}}" alt="プロフィール画像">
             </a>
-        </td>
+        </th>
         <td>{{ $post->name}}</td>
         <td>{{ $post->post }}</td>
         <td>{{ $post->created_at }}</td>
         <td>
-            <a href="/post/{{ $post->p_id }}/update-form">
+            <a href="{{ route('post.edit', ['id' => $post->p_id]) }}">
                 <img src="{{asset('/images/edit.png')}}" alt="編集ボタン">
             </a>
         </td>
         <td>
-        <form action="/post/delete" method="post">
+        <form action="/post/delete" method="post" onclick="return confirm('このつぶやきを削除します。よろしいでしょうか？')" >
             @method('DELETE')
             @csrf
             <input type="hidden" name="id" value="{{ $post->p_id }}">
             <button type="submit" class="delete-btn btn btn-danger">
                 <img src="{{asset('/images/trash.png')}}" alt="削除ボタン">
             </button>
+
+            @error('id')
+            <p class="text-danger">{{$message}}</p>
+            @enderror
         </form>
         </td>
     </tr>

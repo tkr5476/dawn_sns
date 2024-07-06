@@ -14,6 +14,9 @@
                     <img src="{{asset('/images/edit.png')}}" alt="更新ボタン">
                 </button>
             </div>
+            @error('post')
+                <p class="text-danger">{{$message}}</p>
+            @enderror
             </form>
 
     @endsection
