@@ -78,7 +78,6 @@ class PostsController extends Controller
             ]
         );
     }
-
     public function delete(Request $request)
     {
         $this->deleteValidator($request->all())->validate();
@@ -91,46 +90,6 @@ class PostsController extends Controller
 
         return redirect('/top');
     }
-
-    // public function delete(Request $request)
-    // {
-    //     $this->deleteValidator($request->all())->validate();
-
-    //     $id = $request->input('id');
-
-    //     // 投稿が存在し、現在のユーザーが所有者であることを確認
-    //     $post = DB::table('posts')
-    //         ->where('id', $id)
-    //         ->where('user_id', Auth::id())
-    //         ->first();
-
-    //     if (!$post) {
-    //         return redirect('/top')->with('error', '投稿が見つからないか、削除する権限がありません。');
-    //     }
-
-    //     // 確認メッセージをセッションに保存
-    //     return redirect('/top')->with('confirmDelete', [
-    //         'id' => $post->id,
-    //         'message' => '本当にこの投稿を削除しますか？'
-    //     ]);
-    // }
-
-
-    // public function destroyPost(Request $request)
-    // {
-    //     $this->deleteValidator($request->all())->validate();
-
-    //     $id = $request->input('id');
-
-    //     DB::table('posts')
-    //         ->where('id', $id)
-    //         ->where('user_id', Auth::id())
-    //         ->delete();
-
-    //     return redirect('/top')->with('success', '投稿が削除されました。');
-    // }
-
-
 
 
     public function editValidator(array $data)
@@ -158,12 +117,13 @@ class PostsController extends Controller
             ->first();
 
         if (!$post) {
-            return redirect()->route('top')->with('error', '投稿が見つかりませんでした。');
+            return redirect()->back()->with('error', '投稿が見つかりません。');
         }
 
 
         return view('top.update', ['post' => $post]);
     }
+
 
     public function updateValidator(array $data)
     {
@@ -187,10 +147,12 @@ class PostsController extends Controller
 
         $id = $request->input('id');
         $post = $request->input('post');
+
         DB::table('posts')
-            ->where('id', $request->input('id'))
+            ->where('id', $id)
             ->update(['post' => $post]);
 
         return redirect('/top');
     }
 }
+

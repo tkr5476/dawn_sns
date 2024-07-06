@@ -31,8 +31,9 @@
         <td>{{ $post->name}}</td>
         <td>{{ $post->post }}</td>
         <td>{{ $post->created_at }}</td>
+        @if ($post->u_id == Auth::id())
         <td>
-            <a href="{{ route('post.edit', ['id' => $post->p_id]) }}">
+            <a href="{{ route('post.edit', ['id' => $post->p_id]) }}" class="btn btn-primary">
                 <img src="{{asset('/images/edit.png')}}" alt="編集ボタン">
             </a>
         </td>
@@ -48,8 +49,9 @@
             @error('id')
             <p class="text-danger">{{$message}}</p>
             @enderror
-        </form>
+            </form>
         </td>
+        @endif
     </tr>
     @endforeach
 </table>

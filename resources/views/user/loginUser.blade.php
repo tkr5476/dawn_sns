@@ -56,4 +56,9 @@
 </table>
 @endforeach
 
+
+@if ($loginUser == null)
+<p>ユーザー情報の取得に失敗しました。もう一度やり直してください。</p>
+@endif
+
 @endsection

@@ -9,18 +9,17 @@
         <th><img src="{{ asset('/images/' . $userProfile->image) }}" alt="ユーザーアイコン"></th>
         <td>
             @if ($followings->contains('user_id',$userProfile->id))
-            <form action="/profile/follow/delete" method="post">
+            <form action="/user/follow/delete" method="post">
                 @csrf
                 <input type="hidden" name="id" value="{{ $userProfile->id }}">
                 <button type="submit" class="btn btn-info">フォローをはずす</button>
             </form>
             @else
-            <form action="/profile/follow/add" method="post">
+            <form action="/user/follow/add" method="post">
                 @csrf
                 <input type="hidden" name="id" value="{{ $userProfile->id }}">
                 <button type="submit" class="btn btn-outline-info text-dark">フォローする</button>
             </form>
-
             @endif
         </td>
     </tr>

@@ -87,24 +87,28 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
+        <main class="flex justify-center items-center gap-3">
+            <div>
+                @yield('content')
+            </div>
+            <div class="w-1/2">
+            <nav class="pull-right submit-btn">
+                <ul>
+                    <li>
+                        <p>フォロー数：{{ $followCounts }}</p>
+                        <span><a href="/followList/index" class="btn btn-primary">フォローリスト</a></span>
+                    </li>
+                    <li>
+                        <p>フォロワー数：{{ $followerCounts }}</p>
+                        <span><a href="/followerList/index" class="btn btn-primary">フォロワーリスト</a></span>
+                    </li>
+                    <li><a href="/user/search" class="btn btn-primary">ユーザー検索</a></li>
+
+                </ul>
+            </nav>
         </main>
 
-        <nav class="pull-right submit-btn">
-            <ul>
-                <li>
-                    <p>フォロー数：{{ $followCounts }}</p>
-                    <span><a href="/followList/index" class="btn btn-primary">フォローリスト</a></span>
-                </li>
-                <li>
-                    <p>フォロワー数：{{ $followerCounts }}</p>
-                    <span><a href="/followerList/index" class="btn btn-primary">フォロワーリスト</a></span>
-                </li>
-                <li><a href="/user/search" class="btn btn-primary">ユーザー検索</a></li>
 
-            </ul>
-        </nav>
 
     </div>
 </body>

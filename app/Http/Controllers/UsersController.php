@@ -26,8 +26,6 @@ class UsersController extends Controller
             ]
         );
     }
-
-    // }
     public function search(Request $request)
     {
         $this->searchValidator($request->all());
@@ -43,6 +41,7 @@ class UsersController extends Controller
 
         return view('user.searchUser', ['users' => $users, 'followings' => $followings]);
     }
+
 
     public function again(Request $request)
     {
@@ -95,21 +94,27 @@ class UsersController extends Controller
             ->get();
 
         return view('user.loginUser', ['loginUser' => $loginUser, 'loginUserPosts' => $loginUserPosts]);
+
+        if (!$loginUser) {
+            return view('user.loginUser', ['loginUser' => null]);
+        }
     }
+
 
     public function editUserProfile()
     {
-        $this->loginUserProfileValidator($request->all());
 
         $user = DB::table('users')
             ->where('id', Auth::id())
             ->select('id', 'name', 'email', 'bio', 'password', 'image')
             ->first();
 
+        if (!$user) {
+            return redirect('/loginUser')->with('error', 'ユーザー情報の取得に失敗しました。もう一度やり直してください。');
+        }
 
         return view('user.editUserProfile', compact('user'));
     }
-
     public function updateProfile(Request $request)
     {
         $id = $request->input('id');
@@ -148,7 +153,6 @@ class UsersController extends Controller
             ]
         );
     }
-    
     public function userProfile($id)
     {
         $userProfile = DB::table('users')

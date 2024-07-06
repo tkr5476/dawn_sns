@@ -25,7 +25,6 @@ class FollowsController extends Controller
             ]
         );
     }
-
     public function add(Request $request)
     {
         $this->addValidator($request->all())->validate();
@@ -38,6 +37,7 @@ class FollowsController extends Controller
 
         return redirect()->route('user.search');
     }
+
 
     public function deleteValidator(array $data)
     {
@@ -65,5 +65,5 @@ class FollowsController extends Controller
             ->delete();
 
             return redirect()->route('user.search');
-        }
+    }
 }
