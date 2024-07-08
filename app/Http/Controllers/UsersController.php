@@ -236,7 +236,7 @@ class UsersController extends Controller
 
             // アップロードファイルの格納
             try {
-                $iconPath = $request->file('image')->store('/storage/app/public/userIcon/');
+                $iconPath = $request->file('image')->store('/public/userIcon');
                 $data['image'] = Storage::url($iconPath);
             } catch (\Exception $e) {
                 return back()->with('error', 'アイコン画像のアップロードに失敗しました。');
@@ -245,7 +245,8 @@ class UsersController extends Controller
 
         // 5. DBのデータ更新
         try {
-            $user->update($data);
+            $user->fill($data);
+            $user->save();
         } catch (\Exception $e) {
             return back()->with('error', 'プロフィールの更新に失敗しました。');
         }

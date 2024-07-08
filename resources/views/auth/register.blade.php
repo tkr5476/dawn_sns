@@ -61,6 +61,19 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="bio" class="col-md-4 col-form-label text-md-end">{{ __('Bio') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="bio" type="textarea" class="form-control @error('bio') is-invalid @enderror" name="bio" required autocomplete="bio">
+
+                            @error('textarea')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

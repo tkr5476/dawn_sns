@@ -25,7 +25,7 @@
     <tr>
         <th>
             <a href="/user/{{ $post->u_id }}/profile">
-            <img src="{{asset('/images/' . $post->image)}}" alt="プロフィール画像">
+            <img src="{{asset('storage/' . $post->image)}}" alt="プロフィール画像">
             </a>
         </th>
         <td>{{ $post->name}}</td>
@@ -34,7 +34,7 @@
         @if ($post->u_id == Auth::id())
         <td>
             <a href="{{ route('post.edit', ['id' => $post->p_id]) }}" class="btn btn-primary">
-                <img src="{{asset('/images/edit.png')}}" alt="編集ボタン">
+                <img src="{{asset('storage/')}}" alt="編集ボタン">
             </a>
         </td>
         <td>
@@ -43,7 +43,7 @@
             @csrf
             <input type="hidden" name="id" value="{{ $post->p_id }}">
             <button type="submit" class="delete-btn btn btn-danger">
-                <img src="{{asset('/images/trash.png')}}" alt="削除ボタン">
+                <img src="{{asset('/storage/trash.png')}}" alt="削除ボタン">
             </button>
 
             @error('id')
