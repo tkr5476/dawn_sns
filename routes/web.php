@@ -8,6 +8,11 @@ use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\FollowsController;
+use App\Http\Controllers\FollowListsController;
+use App\Http\Controllers\FollowerListsController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,8 +34,8 @@ Auth::routes();
         Route::post('/user/search/again', 'again')->name('user.search.again');
         Route::get('/user/{id}/profile', 'userProfile')->name('user.profile');
         Route::get('/loginUser', 'loginUser')->name('loginUser');
-        Route::get('/editUserProfile', 'editUserProfile')->name('editUserProfile');
-        Route::put('/userProfile/update', 'updateProfile')->name('updateProfile');
+        Route::get('/editUserProfile', 'editUserProfile')->name('profile.edit');
+        Route::put('/userProfile/update', 'updateProfile')->name('profile.update');
     });
 
     Route::controller(FollowsController::class)->group(function () {
