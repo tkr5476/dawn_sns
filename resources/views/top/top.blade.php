@@ -10,7 +10,7 @@
     </div>
     <div class="pull-right submit-btn">
         <button type="submit" class="btn">
-            <img src="{{asset('/images/post.png')}}" alt="追加ボタン">
+            <img src="{{asset('storage/images/post.png')}}" alt="追加ボタン">
         </button>
     </div>
     @error('post')
@@ -25,7 +25,11 @@
     <tr>
         <th>
             <a href="/user/{{ $post->u_id }}/profile">
-            <img src="{{asset('storage/' . $post->image)}}" alt="プロフィール画像">
+            @if ($post->image == "dawn.png")
+                <img src="{{asset('storage/images/dawn.png')}}" alt="デフォルトのプロフィール画像">
+            @else
+                <img src="{{asset('storage/userIcon/'. $post->image)}}" alt="プロフィール画像">
+            @endif
             </a>
         </th>
         <td>{{ $post->name}}</td>
@@ -34,7 +38,7 @@
         @if ($post->u_id == Auth::id())
         <td>
             <a href="{{ route('post.edit', ['id' => $post->p_id]) }}" class="btn btn-primary">
-                <img src="{{asset('storage/')}}" alt="編集ボタン">
+                <img src="{{asset('storage/images/edit.png')}}" alt="編集ボタン">
             </a>
         </td>
         <td>
@@ -43,7 +47,7 @@
             @csrf
             <input type="hidden" name="id" value="{{ $post->p_id }}">
             <button type="submit" class="delete-btn btn btn-danger">
-                <img src="{{asset('/storage/trash.png')}}" alt="削除ボタン">
+                <img src="{{asset('storage/images/trash.png')}}" alt="削除ボタン">
             </button>
 
             @error('id')
