@@ -14,15 +14,16 @@
     @endisset
 </form>
 
-<table>
+<table class="table">
     @foreach($users as $user)
     <tr>
         <td>
             <a href="/user/{{ $user->id }}/profile">
-                <img src="{{asset('/images/' . $user->image)}}" alt="ユーザーアイコン">
+                <img src="{{asset('storage/userIcon/' . $user->image)}}" alt="ユーザーアイコン"
+                class="img-thumbnail rounded-circle col-2">
             </a>
         </td>
-        <td>{{$user->name}}</td>
+        <td class="col-4">{{$user->name}}</td>
         <td>
             @if ($followings->contains('user_id',$user->id))
             <form action="/user/follow/delete" method="post">

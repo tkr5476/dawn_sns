@@ -109,7 +109,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'image' => '/public/image/dawn.png',
+            'image' => '/storage/image/dawn.png',
             'created_at' => now(),
         ]);
     }

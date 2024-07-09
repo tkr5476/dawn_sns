@@ -23,13 +23,20 @@
     </div>
 @endif
 
-<table class="table ">
+<table class="table d-flex justify-content-center mt-5">
     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
         @method('PUT')
         @csrf
 
         <tr>
-            <th><img src="{{ asset('/images/' . $user->image) }}" alt="ログインユーザーアイコン"></th>
+            <th>
+                <label for="image" class="form-label">
+                    <img src="{{ asset('storage/userIcon/' . $user->image) }}" alt="ログインユーザーアイコン" class="img-thumbnail rounded-circle w-30 h-30 col-2 object-fit-cover">
+                </label>
+            </th>
+            <td>
+                <input type="file" id="image" class="form-control" name="image">
+            </td>
         </tr>
 
         <tr>
@@ -77,14 +84,7 @@
             </td>
         </tr>
 
-        <tr>
-            <th>
-                <label for="image" class="form-label">Icon Image</label>
-            </th>
-            <td>
-                <input type="file" id="image" class="form-control" name="image">
-            </td>
-        </tr>
+
 
         <tr>
             <td colspan="2">

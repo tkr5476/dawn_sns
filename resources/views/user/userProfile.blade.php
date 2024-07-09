@@ -4,9 +4,11 @@
 
 @if($userProfile)
 
-<table>
+<table class="table">
     <tr>
-        <th><img src="{{ asset('/images/' . $userProfile->image) }}" alt="ユーザーアイコン"></th>
+        <th>
+            <img src="{{ asset('storage/userIcon/'. $userProfile->image) }}" alt="ユーザーアイコン" class="img-thumbnail rounded-circle w-30 h-30 col-2 object-fit-cover">
+        </th>
         <td>
             @if ($followings->contains('user_id',$userProfile->id))
             <form action="/user/follow/delete" method="post">

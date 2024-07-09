@@ -37,7 +37,6 @@ class AppServiceProvider extends ServiceProvider
                 ->where('user_id', Auth::id())
                 ->count();
 
-
             view()->share(['followCounts' => $followCounts, 'followerCounts' => $followerCounts]);
         });
     }

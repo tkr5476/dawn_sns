@@ -10,8 +10,8 @@
                 <input type="text" name="post" value="{{$post->post}}" class="form-control">
             </div>
             <div class="pull-right submit-btn">
-                <button type="submit" class="btn btn-primary">
-                    <img src="{{asset('/images/edit.png')}}" alt="更新ボタン">
+                <button type="submit" class="btn btn-success btn-sm">
+                    <img src="{{asset('storage/images/edit.png')}}" alt="更新ボタン">
                 </button>
             </div>
             @error('post')

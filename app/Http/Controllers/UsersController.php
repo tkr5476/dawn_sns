@@ -236,8 +236,9 @@ class UsersController extends Controller
 
             // アップロードファイルの格納
             try {
-                $iconPath = $request->file('image')->store('userIcon', 'public');
-                $data['image'] = Storage::url($iconPath);
+                $fileName = $request->file('image')->getClientOriginalName();
+                $Path = $request->file('image')->storeAs('/userIcon', $fileName);
+                $data['image'] = $fileName;
             } catch (\Exception $e) {
                 return back()->with('error', 'アイコン画像のアップロードに失敗しました。');
             }

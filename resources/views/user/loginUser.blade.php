@@ -4,7 +4,7 @@
 
 <table>
     <tr>
-        <th><img src="{{ asset('/images/' . $loginUser->image) }}" alt="ログインユーザーアイコン"></th>
+        <th><img src="{{ asset('storage/userIcon/' . $loginUser->image) }}" alt="ログインユーザーアイコン" class="img-thumbnail rounded-circle w-30 h-30 col-2 object-fit-cover"></th>
     </tr>
 
     <tr>

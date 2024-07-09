@@ -9,7 +9,7 @@
     <tr>
         <td>
             <a href="/user/{{ $followerUser->id }}/profile">
-                <img src="{{asset('/images/' . $followerUser->image)}}" alt="ユーザーアイコン">
+                <img src="{{asset('storage/userIcon/' . $followerUser->image)}}" alt="ユーザーアイコン" class="img-thumbnail rounded-circle w-30 h-30 col-2 object-fit-cover">
             </a>
         </td>
         <td>{{ $followerUser->name }}</td>
@@ -24,7 +24,7 @@
     <tr>
         <td>
             <a href="/user/{{ $followerPost->id }}/profile">
-                <img src="{{asset('/images/' . $followerPost->image)}}" alt="ユーザーアイコン">
+                <img src="{{asset('storage/userIcon/' . $followerPost->image)}}" alt="ユーザーアイコン" class="img-thumbnail rounded-circle w-30 h-30 col-2 object-fit-cover">
             </a>
         </td>
         <td>{{ $followerPost->name }}</td>

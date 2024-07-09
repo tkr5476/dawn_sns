@@ -9,8 +9,8 @@
         <input type="text" name="post" class="form-control" placeholder="投稿内容">
     </div>
     <div class="pull-right submit-btn">
-        <button type="submit" class="btn">
-            <img src="{{asset('storage/images/post.png')}}" alt="追加ボタン">
+        <button type="submit" class="btn btn-success btn-sm shadow-sm">
+            <img src="{{asset('/storage/images/post.png')}}" alt="追加ボタン">
         </button>
     </div>
     @error('post')
@@ -25,11 +25,7 @@
     <tr>
         <th>
             <a href="/user/{{ $post->u_id }}/profile">
-            @if ($post->image == "dawn.png")
-                <img src="{{asset('storage/images/dawn.png')}}" alt="デフォルトのプロフィール画像">
-            @else
-                <img src="{{asset('storage/userIcon/'. $post->image)}}" alt="プロフィール画像">
-            @endif
+                <img src="{{asset('storage/userIcon/'. $post->image)}}" alt="デフォルトのプロフィール画像" class="img-thumbnail rounded-circle w-30 h-30 col-2 object-fit-cover">
             </a>
         </th>
         <td>{{ $post->name}}</td>
@@ -47,7 +43,7 @@
             @csrf
             <input type="hidden" name="id" value="{{ $post->p_id }}">
             <button type="submit" class="delete-btn btn btn-danger">
-                <img src="{{asset('storage/images/trash.png')}}" alt="削除ボタン">
+                <img src="{{asset('/storage/images/trash.png')}}" alt="削除ボタン">
             </button>
 
             @error('id')
