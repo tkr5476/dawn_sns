@@ -23,6 +23,7 @@
     </div>
 @endif
 
+
 <table class="table d-flex justify-content-center mt-5">
     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
         @method('PUT')

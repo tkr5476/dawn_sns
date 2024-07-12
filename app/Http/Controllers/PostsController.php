@@ -65,33 +65,6 @@ class PostsController extends Controller
     }
 
 
-    public function deleteValidator(array $data)
-    {
-        return Validator::make(
-            $data,
-            [
-                'id' => ['required', 'regex:/^[0-9]+$/']
-            ],
-            [
-                'id.required' => 'メッセージの削除に失敗しました。もう一度やり直してください。',
-                'id.regex' => 'メッセージの削除に失敗しました。もう一度やり直してください。',
-            ]
-        );
-    }
-    public function delete(Request $request)
-    {
-        $this->deleteValidator($request->all())->validate();
-
-        $id = $request->input('id');
-
-        DB::table('posts')
-            ->where('id', $id)
-            ->delete();
-
-        return redirect('/top');
-    }
-
-
     public function editValidator(array $data)
     {
         return Validator::make(
@@ -118,7 +91,10 @@ class PostsController extends Controller
 
         if (!$post) {
             return redirect()->back()->with('error', '投稿が見つかりません。');
-        }
+        }    // }else{
+        //     return view('top.update', ['post' => $post]);
+        // }
+
 
 
         return view('top.update', ['post' => $post]);
@@ -154,4 +130,32 @@ class PostsController extends Controller
 
         return redirect('/top');
     }
+
+    
+    public function deleteValidator(array $data)
+    {
+        return Validator::make(
+            $data,
+            [
+                'id' => ['required', 'regex:/^[0-9]+$/']
+            ],
+            [
+                'id.required' => 'メッセージの削除に失敗しました。もう一度やり直してください。',
+                'id.regex' => 'メッセージの削除に失敗しました。もう一度やり直してください。',
+            ]
+        );
+    }
+    public function delete(Request $request)
+    {
+        $this->deleteValidator($request->all())->validate();
+
+        $id = $request->input('id');
+
+        DB::table('posts')
+            ->where('id', $id)
+            ->delete();
+
+        return redirect('/top');
+    }
+
 }

@@ -94,4 +94,62 @@ mysql -h mysql -u sail -p
 
 ## 次回のタスク
 
+```
 添削後の修正
+
+```
+
+
+
+# 変数の情報源メモ
+
+## views
+
+### views/top/
+#### top.blade.php
+- $posts: PostsControllerから取得した投稿データ
+
+#### update.blade.php
+- $post: PostsControllerから取得した編集対象の投稿データ
+
+### views/user/
+#### loginUserProfile.blade.php
+- $loginUser: UsersControllerから取得したログインユーザーの情報
+- $loginUserPosts: UsersControllerから取得したログインユーザーの投稿データ
+
+#### searchUser.blade.php
+- $users: UsersControllerから取得した検索結果のユーザーデータ
+- $followings: UsersControllerから取得したフォロー中のユーザーデータ
+
+#### userProfile.blade.php
+- $userProfile: UsersControllerから取得した表示対象ユーザーの情報
+- $userPosts: UsersControllerから取得した表示対象ユーザーの投稿データ
+
+#### editUserProfile.blade.php
+- $user: UsersControllerから取得したログインユーザーの情報
+
+#### followList.blade.php
+- $followUsers: UsersControllerから取得したフォロー中のユーザーデータ
+- $followPosts: UsersControllerから取得したフォロー中のユーザーの投稿データ
+
+#### followerList.blade.php
+- $followerUsers: UsersControllerから取得したフォロワーのユーザーデータ
+- $followerPosts: UsersControllerから取得したフォロワーの投稿データ
+
+## Controllers
+
+### PostsController
+- $posts: データベースから取得した全ての投稿データ
+- $post: 特定の投稿データ（編集、削除時に使用）
+
+### UsersController
+- $loginUser: 現在ログインしているユーザーの情報
+- $loginUserPosts: ログインユーザーの投稿データ
+- $users: 検索結果のユーザーデータ
+- $followings: ログインユーザーがフォローしているユーザーデータ
+- $userProfile: 表示対象のユーザー情報
+- $userPosts: 表示対象のユーザーの投稿データ
+- $followUsers: フォロー中のユーザーデータ
+- $followPosts: フォロー中のユーザーの投稿データ
+- $followerUsers: フォロワーのユーザーデータ
+- $followerPosts: フォロワーの投稿データ

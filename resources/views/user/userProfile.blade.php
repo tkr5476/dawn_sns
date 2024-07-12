@@ -45,23 +45,6 @@
             <p>{{ $userProfile->bio }}</p>
         </td>
     </tr>
-    {{--
-    <tr>
-        <td>
-            @if ($userProfile->contains('user_id',$userProfile->id))
-            <form action="/user/follow/delete" method="post">
-                @csrf
-                <input type="hidden" name="id" value="{{ $userProfile->id }}">
-    <button type="submit" class="btn btn-info">フォローをはずす</button>
-    </form>
-    @else
-    <form action="/user/follow/add" method="post">
-        @csrf
-        <input type="hidden" name="id" value="{{ $user->id }}">
-        <button type="submit" class="btn btn-outline-info text-dark">フォローする</button>
-    </form>
-    @endif
-    </td>--}}
 </table>
 
 <table>

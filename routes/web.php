@@ -26,14 +26,13 @@ Auth::routes();
         Route::get('/post/{id}/editPost', 'editPost')->name('post.edit');
         Route::put('/post/update', 'update')->name('post.update');
         Route::delete('/post/delete', 'delete')->name('post.delete');
-        Route::post('/posts/destroy', [PostsController::class, 'destroyPost'])->name('post.destroy');
     });
 
     Route::controller(UsersController::class)->group(function () {
         Route::get('/user/search', 'search')->name('user.search');
         Route::post('/user/search/again', 'again')->name('user.search.again');
         Route::get('/user/{id}/profile', 'userProfile')->name('user.profile');
-        Route::get('/loginUser', 'loginUser')->name('loginUser');
+        Route::get('/loginUser/profile', 'loginUserProfile')->name('loginUser.profile');
         Route::get('/editUserProfile', 'editUserProfile')->name('profile.edit');
         Route::put('/userProfile/update', 'updateProfile')->name('profile.update');
     });

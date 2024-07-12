@@ -33,3 +33,5 @@ class FollowerListsController extends Controller
         return view('/user/followerList', ['followerUsers' => $followerUsers, 'followerPosts' => $followerPosts]);
     }
 }
+
+

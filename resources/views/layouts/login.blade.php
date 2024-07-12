@@ -68,7 +68,7 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
-                                <form action="/loginUser" method="get">
+                                <form action="/loginUser/profile" method="get">
                                     @csrf
                                     <button type="submit" class="btn">プロフィール編集</button>
                                 </form>

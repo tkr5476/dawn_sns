@@ -34,35 +34,4 @@ class FollowListsController extends Controller
 
         return view('/user/followList', ['followUsers' => $followUsers, 'followPosts' => $followPosts]);
     }
-
-
-
-
-
-
-
-
-
-
-
-    // public function followList()
-    // {
-    //     $followLists = [
-    //         DB::table('follows')
-    //             ->join('users', 'follows.user_id', '=', 'users.id')
-    //             ->where('follower_id', Auth::id())
-    //             ->select('users.id as u_id', 'users.name', 'users.image')
-    //             ->orderBy('users.name', 'desc')
-    //             ->get(),
-
-    //         DB::table('follows')
-    //             ->join('posts', 'follows.user_id', '=', 'posts.user_id')
-    //             ->where('follower_id', Auth::id())
-    //             ->select('posts.post', 'posts.created_at')
-    //             ->orderBy('posts.created_at', 'desc')
-    //             ->get()
-    //     ];
-
-    //     return view('followList', ['followLists' => $followLists]);
-    // }
 }

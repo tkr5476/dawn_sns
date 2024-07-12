@@ -85,7 +85,7 @@ class UsersController extends Controller
 
         // ユーザーが見つからない場合の処理
         if (!$userProfile) {
-            return view('user.userProfile', ['userProfile' => null]);
+            return view('/user.userProfile', ['userProfile' => null]);
         }
 
         $userPosts = DB::table('posts')
@@ -99,9 +99,8 @@ class UsersController extends Controller
             ->get();
 
 
-        return view('user.userProfile', ['userProfile' => $userProfile, 'userPosts' => $userPosts, 'followings' => $followings]);
+        return view('/user.userProfile', ['userProfile' => $userProfile, 'userPosts' => $userPosts, 'followings' => $followings]);
     }
-
 
 
     public function loginUserProfileValidator(array $data)
@@ -121,7 +120,7 @@ class UsersController extends Controller
             ]
         );
     }
-    public function loginUser()
+    public function loginUserProfile()
     {
         $loginUser = DB::table('users')
             ->where('id', Auth::id())
@@ -134,10 +133,10 @@ class UsersController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('user.loginUser', ['loginUser' => $loginUser, 'loginUserPosts' => $loginUserPosts]);
+        return view('/user.loginUserProfile', ['loginUser' => $loginUser, 'loginUserPosts' => $loginUserPosts]);
 
         if (!$loginUser) {
-            return view('user.loginUser', ['loginUser' => null]);
+            return view('/user.loginUserProfile', ['loginUser' => null]);
         }
     }
 

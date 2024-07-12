@@ -25,7 +25,7 @@
     <tr>
         <th>
             <a href="/user/{{ $post->u_id }}/profile">
-                <img src="{{asset('storage/userIcon/'. $post->image)}}" alt="デフォルトのプロフィール画像" class="img-thumbnail rounded-circle w-30 h-30 col-2 object-fit-cover">
+                <img src="{{asset('storage/userIcon/'. $post->image)}}" alt="プロフィール画像" class="img-thumbnail rounded-circle w-30 h-30 col-2 object-fit-cover">
             </a>
         </th>
         <td>{{ $post->name}}</td>
