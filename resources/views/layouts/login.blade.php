@@ -65,7 +65,7 @@
                                     {{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">{{--特にいじっていないがloginControkkersに記載あり--}}
                                     @csrf
                                 </form>
                                 <form action="/loginUser/profile" method="get">

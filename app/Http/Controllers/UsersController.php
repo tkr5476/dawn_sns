@@ -63,6 +63,7 @@ class UsersController extends Controller
         return view('user.searchUser', ['users' => $users, 'followings' => $followings, 'keyword' => $keyword]);
     }
 
+    
     public function userProfileValidator(array $data)
     {
         return Validator::make(
@@ -162,7 +163,6 @@ class UsersController extends Controller
     }
 
 
-
     public function updateProfile(Request $request)
     {
         // 1. データの受信/バリデーション
@@ -253,7 +253,9 @@ class UsersController extends Controller
 
         // 5. DBのデータ更新
         try {
-            $user->fill($data);//バリデーション済みのデータでユーザーモデルを更新
+            $user->fill($data);
+            //バリデーション済みのデータでユーザーモデルを更新
+            //fill -> $fillableプロパティで指定された属性を一括で更新する
             $user->save();//ユーザーモデルをデータベースに保存
         } catch (\Exception $e) {
             return back()->with('error', 'プロフィールの更新に失敗しました。');
