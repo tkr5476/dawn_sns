@@ -30,7 +30,8 @@ class FollowsController extends Controller
         $this->addValidator($request->all())->validate();
 
         $follow = $request->input('id');
-        DB::table('follows')->insert([
+        DB::table('follows')
+            ->insert([
             'follower_id' => Auth::id(),
             'user_id' => $follow,
         ]);

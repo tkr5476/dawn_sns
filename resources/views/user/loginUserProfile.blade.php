@@ -2,6 +2,7 @@
 
 @section('content')
 
+@if ($loginUser)
 <table>
     <tr>
         <th><img src="{{ asset('storage/userIcon/' . $loginUser->image) }}" alt="ログインユーザーアイコン" class="img-thumbnail rounded-circle w-30 h-30 col-2 object-fit-cover"></th>
@@ -47,7 +48,6 @@
     <tr>
         <th>
             <p>{{ $loginUserPost->post }}</p>
-            {{--投稿の編集機能をここにもあるといいかも--}}
         </th>
         <td>
             <p>{{ $loginUserPost->created_at }}</p>
@@ -56,8 +56,7 @@
 </table>
 @endforeach
 
-
-@if ($loginUser == null)
+@else
 <p>ユーザー情報の取得に失敗しました。もう一度やり直してください。</p>
 @endif
 

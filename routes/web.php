@@ -49,3 +49,6 @@ Auth::routes();
     Route::controller(FollowerListsController::class)->group(function () {
         Route::get('/followerList/index', 'followerList')->name('user.followers');
     });
+
+
+

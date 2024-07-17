@@ -11,6 +11,7 @@
         </th>
         <td>
             @if ($followings->contains('user_id',$userProfile->id))
+            {{--folloer_idがログインユーザーになっているIDに「contains（）」を使い、follws.user_idの中に選択されたユーザーのIDが含まれているか確認--}}
             <form action="/user/follow/delete" method="post">
                 @csrf
                 <input type="hidden" name="id" value="{{ $userProfile->id }}">

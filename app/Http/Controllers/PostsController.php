@@ -131,7 +131,7 @@ class PostsController extends Controller
         return redirect('/top');
     }
 
-    
+
     public function deleteValidator(array $data)
     {
         return Validator::make(
@@ -158,4 +158,17 @@ class PostsController extends Controller
         return redirect('/top');
     }
 
+
+    //テスト用
+    public function test(){
+
+        $posts = DB::table('posts')
+        ->join('users','posts.user_id','=','users.id')
+        ->where('posts.user_id',Auth::id())
+        ->select('users.id','users.name','posts.id','posts.post','posts.created_at')
+        ->orderBy('posts.created_at','desc')
+        ->get();
+
+        return view('/test', ['posts' => $posts]);
+    }
 }
